@@ -1,0 +1,14 @@
+1column.phtml
+2columns-left.phtml
+2columns-right.phtml
+3columns.phtml
+head.phtml
+header.phtml
+footer.phtml
+directory/currency.phtml
+languages.phtml
+topmenu.phtml
+
+page.xml
+directory.xml
+catalog.xml

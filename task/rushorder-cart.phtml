@@ -1,0 +1,62 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<div class="rushorder-cart">
+<form  id="rushorderForm" action="<?php echo $this->getUrl('rushorder/index/applyrushorder'); ?>" method="post">
+    <div class="discount" style="position: relative; z-index: 10; float: left; margin-top: -25%;margin-left: 4%;">
+        <h2><?php //echo $this->__('Rush order') ?></h2>
+        <div class="discount-form">
+            
+            <div class="input-box">
+			<label for="coupon_code"><?php echo  Mage::getStoreConfig('rushorder/configuration/cartdesc'); ?></label>
+			<?php if(Mage::getSingleton('core/session')->getRushorderapply() == 'rapply') { ?>
+					<input type="checkbox" checked id="rs1" class="rushorderchk required-entry" style="margin-right: 3px;"  name="rushorderapply" value="1">  <?php echo  Mage::getStoreConfig('rushorder/configuration/title'); ?><br>
+			<?php } else { ?>
+					<input type="checkbox" id="rushorderapply" class="rushorderchk required-entry" style="margin-right: 3px;" name="rushorderapply" value="1">  <?php echo  Mage::getStoreConfig('rushorder/configuration/title'); ?><br>
+			<?php } ?>
+			<div id="rushorderapplyval" style="display: none;" class="validation-advice">This is a required field.</div>
+                  
+            </div>
+            <div class="buttons-set">
+                <button  style="display:none;" type="submit"  id = "id_apply" name="applyrushorder" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Apply')) ?>" class="button" onclick="return validationchk()" value="<?php echo Mage::helper('core')->quoteEscape($this->__('Apply')) ?>"><span><span><?php echo $this->__('Apply') ?></span></span></button>
+				
+				<button  style="display:none;" type="submit" id="id_apply2" name="resetrushorder" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Reset')) ?>" class="button" value="<?php echo Mage::helper('core')->quoteEscape($this->__('Reset')) ?>"><span><span><?php echo $this->__('Reset') ?></span></span></button>
+            </div>
+        </div>
+    </div>
+</form>
+</div>
+
+<script type="text/javascript">
+
+//<![CDATA[
+	
+
+jQuery('#rushorderapply').click(function() {
+if(jQuery('#rushorderapply').not(':checked').length){
+
+      jQuery('#id_apply2').trigger("click");
+	 
+   }else{
+	   
+     jQuery('#id_apply').trigger("click");
+
+   }
+	
+});
+ jQuery("#rs1").click(function () {
+
+	jQuery('input:checkbox[name=rushorderapply]').attr('checked',false);
+	 jQuery('#id_apply2').trigger("click");
+    });
+//]]>
+	function validationchk(){
+		var remember = document.getElementById('rushorderapply');
+		if (remember.checked){
+			// check box is checked
+			return true;
+		}else{
+			// check box is not checked
+			document.getElementById('rushorderapplyval').style.display = "block";
+			return false;
+		}
+	}
+</script>
